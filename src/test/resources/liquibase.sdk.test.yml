@@ -1,0 +1,12 @@
+inputFormat: xml
+context: testContext
+
+databasesUnderTest:
+  - name: snowflake
+    version:
+    url: jdbc:snowflake://{account_id}.snowflakecomputing.com/?db=lbcat&schema=public
+    username:
+    password:
+    dbSchema: PUBLIC
+   # paste you snowflake account id and credentials. URL format described here
+  #https://docs.snowflake.com/en/user-guide/jdbc-configure.html#connection-parameters

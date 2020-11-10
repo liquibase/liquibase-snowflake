@@ -1,0 +1,3 @@
+liquibase.ext.snowflake.snapshot.SnowflakeSchemaSnapshotGenerator
+liquibase.ext.snowflake.snapshot.SnowflakeSequenceSnapshotGenerator
+liquibase.ext.snowflake.snapshot.SnowflakeUniqueConstraintSnapshotGenerator

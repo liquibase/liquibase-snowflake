@@ -1,0 +1,2 @@
+liquibase.ext.snowflake.sqlgenerator.SnowflakeRenameTableGenerator
+liquibase.ext.snowflake.sqlgenerator.SnowflakeRenameViewGenerator
