@@ -33,19 +33,8 @@ public class SnowflakeResultSetExtractor extends SingleResultSetExtractor {
     }
 
     @Override
-    protected boolean shouldBulkSelect(String schemaKey, SnowflakeResultSetCache ResultSetCacheHana) {
-        return this.tableName == null || getAllCatalogsStringScratchData() != null
-                || super.shouldBulkSelect(schemaKey, ResultSetCacheHana);
-    }
-
-    @Override
     public boolean bulkContainsSchema(String schemaKey) {
         return false;
-    }
-
-    @Override
-    public String getSchemaKey(CachedRow row) {
-        return row.getString("CONSTRAINT_SCHEM");
     }
 
     @Override
@@ -95,10 +84,6 @@ public class SnowflakeResultSetExtractor extends SingleResultSetExtractor {
         }
 
         return sql;
-    }
-
-    private String getAllCatalogsStringScratchData() {
-        return (String) this.databaseSnapshot.getScratchData(JdbcDatabaseSnapshot.ALL_CATALOGS_STRING_SCRATCH_KEY);
     }
 
 }

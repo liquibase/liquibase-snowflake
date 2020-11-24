@@ -9,4 +9,5 @@ databasesUnderTest:
     password:
     dbSchema: PUBLIC
    # paste you snowflake account id and credentials. URL format described here
-  #https://docs.snowflake.com/en/user-guide/jdbc-configure.html#connection-parameters
+  # https://docs.snowflake.com/en/user-guide/jdbc-configure.html#connection-parameters
+  # SnowflakeChangeObjectIT requires DB pre-populated with data use sdk.test.initScript.sql
