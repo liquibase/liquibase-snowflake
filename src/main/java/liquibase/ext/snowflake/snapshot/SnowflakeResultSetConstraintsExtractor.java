@@ -9,12 +9,11 @@ import liquibase.database.Database;
 import liquibase.exception.DatabaseException;
 import liquibase.snapshot.CachedRow;
 import liquibase.snapshot.DatabaseSnapshot;
-import liquibase.snapshot.JdbcDatabaseSnapshot;
 import liquibase.snapshot.SnowflakeResultSetCache;
 import liquibase.snapshot.SnowflakeResultSetCache.SingleResultSetExtractor;
 import liquibase.structure.core.Schema;
 
-public class SnowflakeResultSetExtractor extends SingleResultSetExtractor {
+public class SnowflakeResultSetConstraintsExtractor extends SingleResultSetExtractor {
 
     private DatabaseSnapshot databaseSnapshot;
     private Database database;
@@ -22,8 +21,8 @@ public class SnowflakeResultSetExtractor extends SingleResultSetExtractor {
     private String schemaName;
     private String tableName;
 
-    public SnowflakeResultSetExtractor(DatabaseSnapshot databaseSnapshot, String catalogName, String schemaName,
-                                  String tableName) {
+    public SnowflakeResultSetConstraintsExtractor(DatabaseSnapshot databaseSnapshot, String catalogName, String schemaName,
+                                                  String tableName) {
         super(databaseSnapshot.getDatabase());
         this.databaseSnapshot = databaseSnapshot;
         this.database = databaseSnapshot.getDatabase();

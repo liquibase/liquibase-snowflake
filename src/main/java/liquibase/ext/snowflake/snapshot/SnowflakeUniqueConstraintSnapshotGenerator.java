@@ -40,7 +40,7 @@ public class SnowflakeUniqueConstraintSnapshotGenerator extends UniqueConstraint
     @Override
     protected List<CachedRow> listConstraints(Table table, DatabaseSnapshot snapshot, Schema schema)
             throws DatabaseException, SQLException {
-        return new SnowflakeResultSetExtractor(snapshot, schema.getCatalogName(), schema.getName(), table.getName())
+        return new SnowflakeResultSetConstraintsExtractor(snapshot, schema.getCatalogName(), schema.getName(), table.getName())
                 .fastFetch();
     }
 

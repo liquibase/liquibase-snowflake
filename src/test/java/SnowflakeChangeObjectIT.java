@@ -1,6 +1,6 @@
-import liquibase.sdk.test.BaseLiquibaseSdkSuite;
+import liquibase.harness.BaseHarnessSuite;
 
 
-class SnowflakeChangeObjectIT extends BaseLiquibaseSdkSuite {
+class SnowflakeChangeObjectIT extends BaseHarnessSuite {
 
 }
