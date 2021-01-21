@@ -36,7 +36,7 @@ See [getJdbcCatalogName](#getJdbcCatalogName)
 
 The `datetime` datatype in Snowflake is an alias for the datatype `timestamp_ntz`, [Date and Time Data Types](https://docs.snowflake.net/manuals/sql-reference/data-types.html#date-and-time-data-types).
 The `TimestampNTZType` class clarifies this mapping from Liquibase `datetime` to Snowflake `timestamp_ntz`.
-
+To map `text` datatype in changesets to `text` Snowflake datatype SnowflakeTextDataType class is added (default liquibase-core classes maps it to `CLOB`)
 
 ## ChangeLog
 
