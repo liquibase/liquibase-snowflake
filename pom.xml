@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-snowflake</artifactId>
-    <version>3.10.4-SNAPSHOT</version>
+    <version>3.10.5-SNAPSHOT</version>
     <name>Liquibase Snowflake Database Integration</name>
     <description>Liquibase extension for Snowflake database</description>
     <url>http://www.liquibase.org</url>
