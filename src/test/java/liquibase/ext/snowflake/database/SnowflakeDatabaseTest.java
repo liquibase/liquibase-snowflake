@@ -1,5 +1,7 @@
 package liquibase.ext.snowflake.database;
 
+import liquibase.database.AbstractJdbcDatabase;
+import liquibase.database.Database;
 import liquibase.ext.snowflake.helpers.SetUtils;
 import liquibase.CatalogAndSchema;
 import liquibase.database.jvm.JdbcConnection;
@@ -137,9 +139,13 @@ public class SnowflakeDatabaseTest {
 
     @Test
     public void testGetAutoIncrementClause() {
-        assertEquals("", database.getAutoIncrementClause());
-        assertEquals(" AUTOINCREMENT ", database.getAutoIncrementClause(null, null));
-        assertEquals(" AUTOINCREMENT(1,1) ", database.getAutoIncrementClause(new BigInteger("1"), new BigInteger("1")));
+        assertEquals("AUTOINCREMENT", database.getAutoIncrementClause());
+        assertEquals("AUTOINCREMENT (1, 1)", database.getAutoIncrementClause(null, null, null, null));
+        assertEquals("AUTOINCREMENT (1, 1)", database.getAutoIncrementClause(new BigInteger("1"), new BigInteger("1"), null, null));
+        assertEquals("AUTOINCREMENT (7, 1)", database.getAutoIncrementClause(new BigInteger("7"), new BigInteger("1"), null, null));
+        assertEquals("AUTOINCREMENT (1, 7)", database.getAutoIncrementClause(new BigInteger("1"), new BigInteger("7"), null, null));
+        assertEquals("AUTOINCREMENT (7, 1)", database.getAutoIncrementClause(new BigInteger("7"), null, null, null));
+        assertEquals("AUTOINCREMENT (1, 7)", database.getAutoIncrementClause(null, new BigInteger("7"), null, null));
     }
 
     @Test
