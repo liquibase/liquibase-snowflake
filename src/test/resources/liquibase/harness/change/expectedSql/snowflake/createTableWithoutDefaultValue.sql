@@ -1,0 +1,1 @@
+CREATE TABLE "PUBLIC".dropDefaultTest (id INT, stringColumn STRING DEFAULT 'testDefault')

@@ -1,1 +1,1 @@
-CREATE TABLE createTableDataTypeText (textCol TEXT)
+CREATE TABLE "PUBLIC".createTableDataTypeText (textCol TEXT)
