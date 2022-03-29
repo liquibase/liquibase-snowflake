@@ -12,7 +12,7 @@ This file should contain the connection information for all the databases you wa
 Use `harness.initScript.sql` file to create and populate test database for harness integration tests
 
 #### Executing the tests
-From your IDE, right click on the `SnowflakeChangeObjectIT` test class present in `src/test/java` directory. 
+From your IDE, right click on the `liquibase.ext.snowflake.SnowflakeChangeObjectIT` test class present in `src/test/groovy` directory. 
 Doing so, will allow you to execute all the standard change object tests in the liquibase-test-harness as well as the
 snowflake specific change objects tests created exclusively to test this extension (You can find this in the 
 `src/test/resources/liquibase/harness/changelogs/snowflake` directory).

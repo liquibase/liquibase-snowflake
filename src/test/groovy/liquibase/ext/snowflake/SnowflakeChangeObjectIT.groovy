@@ -1,3 +1,5 @@
+package liquibase.ext.snowflake;
+
 import liquibase.harness.BaseHarnessSuite;
 
 

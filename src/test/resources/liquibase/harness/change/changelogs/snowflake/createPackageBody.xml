@@ -7,10 +7,10 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet  author="as" id="1">
-        <pro:createPackage encoding="UTF-8"
-                           packageName="Test package">
+        <pro:createPackageBody encoding="UTF-8"
+                               packageBodyName="Test package">
             CREATE TABLE "PUBLIC".test_table_package_body (test_id INT NOT NULL);
-        </pro:createPackage>
+        </pro:createPackageBody>
         <rollback>
             <dropTable tableName="test_table_package_body"/>
         </rollback>

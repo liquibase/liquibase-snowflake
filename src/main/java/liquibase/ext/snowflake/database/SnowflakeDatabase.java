@@ -6,8 +6,6 @@ import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
-import liquibase.logging.LogFactory;
-import liquibase.logging.Logger;
 import liquibase.structure.DatabaseObject;
 
 import java.math.BigInteger;
@@ -66,6 +64,8 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
 
     @Override
     public boolean supportsDropTableCascadeConstraints() {
+        // Snowflake doesn't enforce constraints, so statement won't throw error, but won't drop table as well
+        // https://docs.snowflake.com/en/sql-reference/constraints.html
         return true;
     }
 

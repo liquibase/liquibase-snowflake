@@ -13,10 +13,10 @@
                 encoding="UTF-8"
                 path="createProcedure.txt"
                 relativeToChangelogFile="true"
-                procedureName="test_procedure">
+                procedureName="test_procedure()">
         </createProcedure>
         <rollback>
-            <dropProcedure procedureName="test_procedure"/>
+            <dropProcedure procedureName="test_procedure()"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

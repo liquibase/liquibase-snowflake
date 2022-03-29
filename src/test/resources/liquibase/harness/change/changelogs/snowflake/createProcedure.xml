@@ -12,7 +12,7 @@
                 comments="test procedure"
                 encoding="UTF-8"
                 procedureName="test_procedure">
-                    CREATE or replace PROCEDURE proc3()
+                    CREATE or replace PROCEDURE test_procedure()
                     RETURNS VARCHAR
                     LANGUAGE javascript
                     AS
@@ -25,7 +25,7 @@
                     $$;
         </createProcedure>
         <rollback>
-            <dropProcedure procedureName="proc3()"/>
+            <dropProcedure procedureName="test_procedure()"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

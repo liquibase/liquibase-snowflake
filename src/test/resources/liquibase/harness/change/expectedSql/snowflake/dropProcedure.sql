@@ -1,4 +1,4 @@
-CREATE or replace PROCEDURE proc3()
+CREATE or replace PROCEDURE test_procedure()
 RETURNS VARCHAR
 LANGUAGE javascript
 AS
@@ -9,4 +9,4 @@ SELECT 'value 1' AS "column 1" ;`
 } )
 return 'Done.'
 $$
-DROP PROCEDURE proc3()
+DROP PROCEDURE test_procedure()
