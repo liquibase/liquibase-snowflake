@@ -4,10 +4,9 @@ context: testContext
 databasesUnderTest:
   - name: snowflake
     version:
-    url: jdbc:snowflake://{account_id}.snowflakecomputing.com/?db=lbcat&schema=public
-    username:
-    password:
-    dbSchema: PUBLIC
+    url: jdbc:snowflake://ba89345.us-east-2.aws.snowflakecomputing.com/?warehouse=COMPUTE_WH&db=lbcat&schema=PUBLIC
+    username: okushniryk
+    password: ^K7$1y@u4vYn
    # paste you snowflake account id and credentials. URL format described here
   # https://docs.snowflake.com/en/user-guide/jdbc-configure.html#connection-parameters
-  # SnowflakeChangeObjectIT requires DB pre-populated with data use harness.initScript.sql
+  # liquibase.ext.snowflake.SnowflakeChangeObjectIT requires DB pre-populated with data use harness.initScript.sql

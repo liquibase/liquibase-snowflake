@@ -4,6 +4,7 @@ import liquibase.CatalogAndSchema;
 import liquibase.Scope;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
+import liquibase.database.ObjectQuotingStrategy;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.structure.DatabaseObject;
@@ -12,6 +13,7 @@ import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class SnowflakeDatabase extends AbstractJdbcDatabase {
@@ -23,7 +25,7 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     public SnowflakeDatabase() {
         super.setCurrentDateTimeFunction("current_timestamp::timestamp_ntz");
         super.unmodifiableDataTypes.addAll(Arrays.asList("integer", "bool", "boolean", "int4", "int8", "float4", "float8", "numeric", "bigserial", "serial", "bytea", "timestamptz"));
-        super.unquotedObjectsAreUppercased = false;
+        super.unquotedObjectsAreUppercased = true;
         super.addReservedWords(getDefaultReservedWords());
     }
 
@@ -84,22 +86,22 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
 
     @Override
     public String getDefaultCatalogName() {
-        return super.getDefaultCatalogName() == null ? null : super.getDefaultCatalogName().toUpperCase();
+        return super.getDefaultCatalogName() == null ? null : super.getDefaultCatalogName();
     }
 
     @Override
     public String getDefaultSchemaName() {
-        return super.getDefaultSchemaName() == null ? null : super.getDefaultSchemaName().toUpperCase();
+        return super.getDefaultSchemaName() == null ? null : super.getDefaultSchemaName();
     }
 
     @Override
     public String getJdbcCatalogName(final CatalogAndSchema schema) {
-        return super.getJdbcCatalogName(schema) == null ? null : super.getJdbcCatalogName(schema).toUpperCase();
+        return super.getJdbcCatalogName(schema) == null ? null : super.getJdbcCatalogName(schema);
     }
 
     @Override
     public String getJdbcSchemaName(final CatalogAndSchema schema) {
-        return super.getJdbcSchemaName(schema) == null ? null : super.getJdbcSchemaName(schema).toUpperCase();
+        return super.getJdbcSchemaName(schema) == null ? null : super.getJdbcSchemaName(schema);
     }
 
     @Override
@@ -113,18 +115,29 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     }
 
     @Override
+    public String correctObjectName(String objectName, Class<? extends DatabaseObject> objectType) {
+        if ((getObjectQuotingStrategy() == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) || (unquotedObjectsAreUppercased == null) ||
+                ( objectName == null) || (objectName.startsWith("\"") && objectName.endsWith("\""))) {
+            return objectName;
+        } else if (Boolean.TRUE.equals(unquotedObjectsAreUppercased)) {
+            return objectName.toUpperCase(Locale.US);
+        } else {
+            return objectName.toLowerCase(Locale.US);
+        }    }
+
+    @Override
     public boolean supportsSequences() {
         return true;
     }
 
     @Override
     public String getDatabaseChangeLogTableName() {
-        return super.getDatabaseChangeLogTableName().toUpperCase();
+        return super.getDatabaseChangeLogTableName();
     }
 
     @Override
     public String getDatabaseChangeLogLockTableName() {
-        return super.getDatabaseChangeLogLockTableName().toUpperCase();
+        return super.getDatabaseChangeLogLockTableName();
     }
 
     @Override
