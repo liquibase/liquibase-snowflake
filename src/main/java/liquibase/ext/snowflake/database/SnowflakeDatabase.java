@@ -4,7 +4,6 @@ import liquibase.CatalogAndSchema;
 import liquibase.Scope;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
-import liquibase.database.ObjectQuotingStrategy;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.structure.DatabaseObject;
@@ -13,7 +12,6 @@ import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 public class SnowflakeDatabase extends AbstractJdbcDatabase {
@@ -113,17 +111,6 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     public boolean supportsCatalogInObjectName(Class<? extends DatabaseObject> type) {
         return false;
     }
-
-    @Override
-    public String correctObjectName(String objectName, Class<? extends DatabaseObject> objectType) {
-        if ((getObjectQuotingStrategy() == ObjectQuotingStrategy.QUOTE_ALL_OBJECTS) || (unquotedObjectsAreUppercased == null) ||
-                ( objectName == null) || (objectName.startsWith("\"") && objectName.endsWith("\""))) {
-            return objectName;
-        } else if (Boolean.TRUE.equals(unquotedObjectsAreUppercased)) {
-            return objectName.toUpperCase(Locale.US);
-        } else {
-            return objectName.toLowerCase(Locale.US);
-        }    }
 
     @Override
     public boolean supportsSequences() {
