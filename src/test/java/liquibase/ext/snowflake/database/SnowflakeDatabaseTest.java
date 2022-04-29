@@ -164,12 +164,12 @@ public class SnowflakeDatabaseTest {
     }
 
     @Test
-    public void defaultCatalogNameIsUpperCase() throws Exception {
+    public void defaultCatalogNameCasingIsRespected() throws Exception {
         JdbcConnection mock = mock(JdbcConnection.class);
         database.setConnection(mock);
-        when(mock.getCatalog()).thenReturn("foo");
+        when(mock.getCatalog()).thenReturn("Foo");
 
-        assertEquals("FOO", database.getDefaultCatalogName());
+        assertEquals("Foo", database.getDefaultCatalogName());
     }
 
     @Test
@@ -178,18 +178,18 @@ public class SnowflakeDatabaseTest {
     }
 
     @Test
-    public void defaultSchemaNameIsUpperCase() throws Exception {
+    public void defaultSchemaNameCasingIsRespected() throws Exception {
         JdbcConnection jdbcConnection = mock(JdbcConnection.class);
         ResultSet resultSet = mock(ResultSet.class);
         Statement statement = mock(Statement.class);
         when(statement.executeQuery(anyString())).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true);
-        when(resultSet.getString(1)).thenReturn("foo");
+        when(resultSet.getString(1)).thenReturn("Foo");
         when(jdbcConnection.createStatement()).thenReturn(statement);
 
         database.setConnection(jdbcConnection);
 
-        assertEquals("FOO", database.getDefaultSchemaName());
+        assertEquals("Foo", database.getDefaultSchemaName());
     }
 
     @Test

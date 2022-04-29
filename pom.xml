@@ -104,6 +104,7 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-test-harness</artifactId>
             <version>1.0.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.snowflake</groupId>

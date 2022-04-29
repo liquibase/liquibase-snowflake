@@ -118,16 +118,6 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     }
 
     @Override
-    public String getDatabaseChangeLogTableName() {
-        return super.getDatabaseChangeLogTableName();
-    }
-
-    @Override
-    public String getDatabaseChangeLogLockTableName() {
-        return super.getDatabaseChangeLogLockTableName();
-    }
-
-    @Override
     public boolean isSystemObject(DatabaseObject example) {
         return super.isSystemObject(example);
     }
