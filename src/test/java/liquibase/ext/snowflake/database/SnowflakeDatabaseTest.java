@@ -121,11 +121,6 @@ public class SnowflakeDatabaseTest {
     }
 
     @Test
-    public void testIsSystemObject() {
-        assertFalse(database.isSystemObject(null));
-    }
-
-    @Test
     public void testSupportsTablespaces() {
         assertFalse(database.supportsTablespaces());
     }
@@ -164,32 +159,8 @@ public class SnowflakeDatabaseTest {
     }
 
     @Test
-    public void defaultCatalogNameCasingIsRespected() throws Exception {
-        JdbcConnection mock = mock(JdbcConnection.class);
-        database.setConnection(mock);
-        when(mock.getCatalog()).thenReturn("Foo");
-
-        assertEquals("Foo", database.getDefaultCatalogName());
-    }
-
-    @Test
     public void defaultCatalogNameIsNullWhenConnectionIsNull() throws Exception {
         assertNull(database.getDefaultCatalogName());
-    }
-
-    @Test
-    public void defaultSchemaNameCasingIsRespected() throws Exception {
-        JdbcConnection jdbcConnection = mock(JdbcConnection.class);
-        ResultSet resultSet = mock(ResultSet.class);
-        Statement statement = mock(Statement.class);
-        when(statement.executeQuery(anyString())).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(true);
-        when(resultSet.getString(1)).thenReturn("Foo");
-        when(jdbcConnection.createStatement()).thenReturn(statement);
-
-        database.setConnection(jdbcConnection);
-
-        assertEquals("Foo", database.getDefaultSchemaName());
     }
 
     @Test
@@ -197,19 +168,10 @@ public class SnowflakeDatabaseTest {
         assertNull(database.getDefaultSchemaName());
     }
 
-    @Test
-    public void jdbcCatalogNameIsUpperCase() {
-        assertEquals("CATALOG", database.getJdbcCatalogName(new CatalogAndSchema("catalog", "schema")));
-    }
 
     @Test
     public void jdbcCatalogNameIsNullWhenCatalogAndSchemaAreNull() {
         assertNull(database.getJdbcCatalogName(new CatalogAndSchema(null, null)));
-    }
-
-    @Test
-    public void jdbcSchemaNameIsUpperCase() {
-        assertEquals("SCHEMA", database.getJdbcSchemaName(new CatalogAndSchema("catalog", "schema")));
     }
 
     @Test

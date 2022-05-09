@@ -83,26 +83,6 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     }
 
     @Override
-    public String getDefaultCatalogName() {
-        return super.getDefaultCatalogName() == null ? null : super.getDefaultCatalogName();
-    }
-
-    @Override
-    public String getDefaultSchemaName() {
-        return super.getDefaultSchemaName() == null ? null : super.getDefaultSchemaName();
-    }
-
-    @Override
-    public String getJdbcCatalogName(final CatalogAndSchema schema) {
-        return super.getJdbcCatalogName(schema) == null ? null : super.getJdbcCatalogName(schema);
-    }
-
-    @Override
-    public String getJdbcSchemaName(final CatalogAndSchema schema) {
-        return super.getJdbcSchemaName(schema) == null ? null : super.getJdbcSchemaName(schema);
-    }
-
-    @Override
     public boolean supportsCatalogs() {
         return true;
     }
@@ -115,11 +95,6 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     @Override
     public boolean supportsSequences() {
         return true;
-    }
-
-    @Override
-    public boolean isSystemObject(DatabaseObject example) {
-        return super.isSystemObject(example);
     }
 
     @Override
