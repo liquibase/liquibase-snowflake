@@ -42,7 +42,10 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+            <!--
             <version>4.10.0</version>
+            -->
+            <version>0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -82,6 +85,12 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>4.10.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
@@ -105,6 +114,12 @@
             <artifactId>liquibase-test-harness</artifactId>
             <version>1.0.5</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>net.snowflake</groupId>
@@ -131,7 +146,7 @@
                     <target>1.8</target>
                     <optimize>true</optimize>
                     <debug>true</debug>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
@@ -279,30 +294,6 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <phase>package</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
-                        <configuration>
-                            <passphrase>${env.GPG_PASSPHRASE}</passphrase>
-                            <gpgArguments>
-                                <!-- This is necessary for gpg to not try to use the pinentry programs -->
-                                <arg>--batch</arg>
-                                <arg>--no-tty</arg>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                            </gpgArguments>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
                             </execution>
                         </executions>
                     </plugin>

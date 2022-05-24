@@ -1,6 +1,7 @@
 package liquibase.ext.snowflake.database;
 
 import liquibase.CatalogAndSchema;
+import liquibase.GlobalConfiguration;
 import liquibase.Scope;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
@@ -82,6 +83,52 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
             return "net.snowflake.client.jdbc.SnowflakeDriver";
         }
         return null;
+    }
+
+    @Override
+    public String getLiquibaseSchemaName() {
+        String liquibaseSchemaName = super.getLiquibaseSchemaName();
+        if (liquibaseSchemaName == null) {
+            return null;
+        }
+        if (Boolean.TRUE.equals(GlobalConfiguration.PRESERVE_SCHEMA_CASE.getCurrentValue())) {
+            return liquibaseSchemaName;
+        }
+        return liquibaseSchemaName.toUpperCase();
+    }
+
+    @Override
+    public String getDefaultCatalogName() {
+        return super.getDefaultCatalogName() == null ? null : super.getDefaultCatalogName().toUpperCase();
+    }
+
+    @Override
+    public String getDefaultSchemaName() {
+        if (super.getDefaultSchemaName() == null) {
+            return null;
+        }
+        String defaultSchemaName = super.getDefaultSchemaName();
+        if (Boolean.TRUE.equals(GlobalConfiguration.PRESERVE_SCHEMA_CASE.getCurrentValue())) {
+            return defaultSchemaName;
+        }
+        return defaultSchemaName.toUpperCase();
+    }
+
+    @Override
+    public String getJdbcCatalogName(final CatalogAndSchema schema) {
+        return super.getJdbcCatalogName(schema) == null ? null : super.getJdbcCatalogName(schema).toUpperCase();
+    }
+
+    @Override
+    public String getJdbcSchemaName(final CatalogAndSchema schema) {
+        if (super.getJdbcSchemaName(schema) == null) {
+            return null;
+        }
+        String jdbcSchemaName = super.getJdbcSchemaName(schema);
+        if (Boolean.TRUE.equals(GlobalConfiguration.PRESERVE_SCHEMA_CASE.getCurrentValue())) {
+            return jdbcSchemaName;
+        }
+        return super.getJdbcSchemaName(schema).toUpperCase();
     }
 
     @Override
