@@ -5,6 +5,7 @@ import liquibase.GlobalConfiguration;
 import liquibase.Scope;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
+import liquibase.database.OfflineConnection;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.structure.DatabaseObject;
@@ -187,7 +188,7 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
     @Override
     protected String getConnectionSchemaName() {
         DatabaseConnection connection = getConnection();
-        if (connection == null) {
+        if (connection == null || connection instanceof OfflineConnection) {
             return null;
         }
         try {
