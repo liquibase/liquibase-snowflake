@@ -100,15 +100,16 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
 
     @Override
     public String getDefaultCatalogName() {
-        return super.getDefaultCatalogName() == null ? null : super.getDefaultCatalogName().toUpperCase();
+        String defaultCatalogName = super.getDefaultCatalogName();
+        return defaultCatalogName == null ? null : defaultCatalogName.toUpperCase();
     }
 
     @Override
     public String getDefaultSchemaName() {
-        if (super.getDefaultSchemaName() == null) {
+        String defaultSchemaName = super.getDefaultSchemaName();
+        if (defaultSchemaName == null) {
             return null;
         }
-        String defaultSchemaName = super.getDefaultSchemaName();
         if (Boolean.TRUE.equals(GlobalConfiguration.PRESERVE_SCHEMA_CASE.getCurrentValue())) {
             return defaultSchemaName;
         }
@@ -117,19 +118,20 @@ public class SnowflakeDatabase extends AbstractJdbcDatabase {
 
     @Override
     public String getJdbcCatalogName(final CatalogAndSchema schema) {
-        return super.getJdbcCatalogName(schema) == null ? null : super.getJdbcCatalogName(schema).toUpperCase();
+        String jdbcCatalogName = super.getJdbcCatalogName(schema);
+        return jdbcCatalogName == null ? null : jdbcCatalogName.toUpperCase();
     }
 
     @Override
     public String getJdbcSchemaName(final CatalogAndSchema schema) {
-        if (super.getJdbcSchemaName(schema) == null) {
+        String jdbcSchemaName = super.getJdbcSchemaName(schema);
+        if (jdbcSchemaName == null) {
             return null;
         }
-        String jdbcSchemaName = super.getJdbcSchemaName(schema);
         if (Boolean.TRUE.equals(GlobalConfiguration.PRESERVE_SCHEMA_CASE.getCurrentValue())) {
             return jdbcSchemaName;
         }
-        return super.getJdbcSchemaName(schema).toUpperCase();
+        return jdbcSchemaName.toUpperCase();
     }
 
     @Override
